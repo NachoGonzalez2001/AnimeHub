@@ -1,0 +1,151 @@
+// Tipos para la API de Jikan
+export interface AnimeData {
+  mal_id: number
+  title: string
+  title_english?: string
+  title_japanese?: string
+  images: {
+    jpg: {
+      image_url: string
+      small_image_url: string
+      large_image_url: string
+    }
+  }
+  synopsis?: string
+  score?: number
+  scored_by?: number
+  rank?: number
+  popularity?: number
+  members?: number
+  favorites?: number
+  status?: string
+  episodes?: number
+  duration?: string
+  rating?: string
+  genres?: Array<{ mal_id: number; name: string }>
+  studios?: Array<{ mal_id: number; name: string }>
+  year?: number
+  season?: string
+}
+
+export interface MangaData {
+  mal_id: number
+  title: string
+  title_english?: string
+  title_japanese?: string
+  images: {
+    jpg: {
+      image_url: string
+      small_image_url: string
+      large_image_url: string
+    }
+  }
+  synopsis?: string
+  score?: number
+  scored_by?: number
+  rank?: number
+  popularity?: number
+  members?: number
+  favorites?: number
+  status?: string
+  chapters?: number
+  volumes?: number
+  genres?: Array<{ mal_id: number; name: string }>
+  authors?: Array<{ mal_id: number; name: string }>
+  published?: {
+    from?: string
+    to?: string
+  }
+}
+
+export interface JikanResponse<T> {
+  data: T[]
+  pagination: {
+    last_visible_page: number
+    has_next_page: boolean
+    current_page: number
+    items: {
+      count: number
+      total: number
+      per_page: number
+    }
+  }
+}
+
+export interface JikanSingleResponse<T> {
+  data: T
+}
+
+const BASE_URL = "https://api.jikan.moe/v4"
+
+// Función para manejar delays entre requests (Jikan tiene rate limiting)
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+export class JikanAPI {
+  private static lastRequestTime = 0
+  private static readonly REQUEST_DELAY = 1000 // 1 segundo entre requests
+
+  private static async makeRequest<T>(url: string): Promise<T> {
+    // Rate limiting: esperar al menos 1 segundo entre requests
+    const now = Date.now()
+    const timeSinceLastRequest = now - this.lastRequestTime
+    if (timeSinceLastRequest < this.REQUEST_DELAY) {
+      await delay(this.REQUEST_DELAY - timeSinceLastRequest)
+    }
+    this.lastRequestTime = Date.now()
+
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    return response.json()
+  }
+
+  // Buscar anime
+  static async searchAnime(query: string, page = 1): Promise<JikanResponse<AnimeData>> {
+    const url = `${BASE_URL}/anime?q=${encodeURIComponent(query)}&page=${page}&limit=20`
+    return this.makeRequest<JikanResponse<AnimeData>>(url)
+  }
+
+  // Buscar manga
+  static async searchManga(query: string, page = 1): Promise<JikanResponse<MangaData>> {
+    const url = `${BASE_URL}/manga?q=${encodeURIComponent(query)}&page=${page}&limit=20`
+    return this.makeRequest<JikanResponse<MangaData>>(url)
+  }
+
+  // Obtener detalles de anime
+  static async getAnimeById(id: number): Promise<JikanSingleResponse<AnimeData>> {
+    const url = `${BASE_URL}/anime/${id}`
+    return this.makeRequest<JikanSingleResponse<AnimeData>>(url)
+  }
+
+  // Obtener detalles de manga
+  static async getMangaById(id: number): Promise<JikanSingleResponse<MangaData>> {
+    const url = `${BASE_URL}/manga/${id}`
+    return this.makeRequest<JikanSingleResponse<MangaData>>(url)
+  }
+
+  // Top anime
+  static async getTopAnime(page = 1): Promise<JikanResponse<AnimeData>> {
+    const url = `${BASE_URL}/top/anime?page=${page}&limit=20`
+    return this.makeRequest<JikanResponse<AnimeData>>(url)
+  }
+
+  // Top manga
+  static async getTopManga(page = 1): Promise<JikanResponse<MangaData>> {
+    const url = `${BASE_URL}/top/manga?page=${page}&limit=20`
+    return this.makeRequest<JikanResponse<MangaData>>(url)
+  }
+
+  // Anime de temporada actual
+  static async getCurrentSeasonAnime(): Promise<JikanResponse<AnimeData>> {
+    const url = `${BASE_URL}/seasons/now`
+    return this.makeRequest<JikanResponse<AnimeData>>(url)
+  }
+
+  // Recomendaciones de anime
+  static async getAnimeRecommendations(): Promise<any> {
+    const url = `${BASE_URL}/recommendations/anime`
+    return this.makeRequest(url)
+  }
+}
