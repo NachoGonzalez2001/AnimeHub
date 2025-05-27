@@ -76,6 +76,36 @@ export interface JikanSingleResponse<T> {
   data: T
 }
 
+export interface AnimeFilters {
+  q?: string
+  type?: "tv" | "movie" | "ova" | "special" | "ona" | "music"
+  status?: "airing" | "complete" | "upcoming"
+  rating?: "g" | "pg" | "pg13" | "r17" | "r" | "rx"
+  genres?: string
+  order_by?:
+    | "mal_id"
+    | "title"
+    | "start_date"
+    | "end_date"
+    | "episodes"
+    | "score"
+    | "scored_by"
+    | "rank"
+    | "popularity"
+    | "members"
+    | "favorites"
+  sort?: "desc" | "asc"
+  page?: number
+  limit?: number
+}
+
+export interface Genre {
+  mal_id: number
+  name: string
+  url: string
+  count: number
+}
+
 const BASE_URL = "https://api.jikan.moe/v4"
 
 // Función para manejar delays entre requests (Jikan tiene rate limiting)
@@ -147,5 +177,25 @@ export class JikanAPI {
   static async getAnimeRecommendations(): Promise<any> {
     const url = `${BASE_URL}/recommendations/anime`
     return this.makeRequest(url)
+  }
+
+  // Buscar anime con filtros avanzados
+  static async searchAnimeWithFilters(filters: AnimeFilters): Promise<JikanResponse<AnimeData>> {
+    const params = new URLSearchParams()
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== "") {
+        params.append(key, value.toString())
+      }
+    })
+
+    const url = `${BASE_URL}/anime?${params.toString()}`
+    return this.makeRequest<JikanResponse<AnimeData>>(url)
+  }
+
+  // Obtener géneros de anime
+  static async getAnimeGenres(): Promise<{ data: Genre[] }> {
+    const url = `${BASE_URL}/genres/anime`
+    return this.makeRequest<{ data: Genre[] }>(url)
   }
 }
