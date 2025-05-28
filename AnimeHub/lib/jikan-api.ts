@@ -99,6 +99,29 @@ export interface AnimeFilters {
   limit?: number
 }
 
+export interface MangaFilters {
+  q?: string
+  type?: "manga" | "novel" | "lightnovel" | "oneshot" | "doujin" | "manhwa" | "manhua"
+  status?: "publishing" | "complete" | "hiatus" | "discontinued" | "upcoming"
+  genres?: string
+  order_by?:
+    | "mal_id"
+    | "title"
+    | "start_date"
+    | "end_date"
+    | "chapters"
+    | "volumes"
+    | "score"
+    | "scored_by"
+    | "rank"
+    | "popularity"
+    | "members"
+    | "favorites"
+  sort?: "desc" | "asc"
+  page?: number
+  limit?: number
+}
+
 export interface Genre {
   mal_id: number
   name: string
@@ -196,6 +219,26 @@ export class JikanAPI {
   // Obtener géneros de anime
   static async getAnimeGenres(): Promise<{ data: Genre[] }> {
     const url = `${BASE_URL}/genres/anime`
+    return this.makeRequest<{ data: Genre[] }>(url)
+  }
+
+  // Buscar manga con filtros avanzados
+  static async searchMangaWithFilters(filters: MangaFilters): Promise<JikanResponse<MangaData>> {
+    const params = new URLSearchParams()
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== "") {
+        params.append(key, value.toString())
+      }
+    })
+
+    const url = `${BASE_URL}/manga?${params.toString()}`
+    return this.makeRequest<JikanResponse<MangaData>>(url)
+  }
+
+  // Obtener géneros de manga
+  static async getMangaGenres(): Promise<{ data: Genre[] }> {
+    const url = `${BASE_URL}/genres/manga`
     return this.makeRequest<{ data: Genre[] }>(url)
   }
 }

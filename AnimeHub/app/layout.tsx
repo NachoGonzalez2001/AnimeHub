@@ -8,8 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "AnimeHub - Tu portal de anime y manga",
-  description: "Descubre, busca y explora el mundo del anime y manga",
-    generator: 'v0.dev'
+  description: "Descubre, busca y explora el mundo del anime y manga"
 }
 
 export default function RootLayout({
