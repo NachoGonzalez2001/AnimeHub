@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Home, Search, BookOpen, TrendingUp, Star, Menu, X } from "lucide-react"
+import { Home, Search, BookOpen, TrendingUp, Star, Menu, X, Lightbulb } from "lucide-react"
 import { useState } from "react"
 
 const navigationItems = [
@@ -12,6 +12,9 @@ const navigationItems = [
   { href: "/manga", label: "Manga", icon: BookOpen },
   { href: "/top-anime", label: "Top Anime", icon: TrendingUp },
   { href: "/top-manga", label: "Top Manga", icon: Star },
+  { href: "/recommendations", label: "Recomendaciones", icon: Lightbulb },
+  // Temporalmente para pruebas - remover en producción
+  { href: "/test", label: "Test", icon: Search },
 ]
 
 export function Navigation() {

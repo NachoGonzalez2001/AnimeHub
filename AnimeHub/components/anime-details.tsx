@@ -70,7 +70,7 @@ export function AnimeDetails({ anime }: AnimeDetailsProps) {
             <div className="flex items-center gap-3 mb-2">
               <Badge className={`${getStatusColor(anime.status)} text-white`}>{getStatusText(anime.status)}</Badge>
               {anime.rating && <Badge variant="outline">{anime.rating}</Badge>}
-              {anime.year && <Badge variant="secondary">{anime.year}</Badge>}
+              {anime.year && <Badge variant="secondary">{anime.year}</Badge>\
             </div>
 
             <h1 className="text-4xl font-bold mb-2">{anime.title}</h1>

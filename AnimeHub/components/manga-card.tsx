@@ -11,6 +11,19 @@ interface MangaCardProps {
 }
 
 export function MangaCard({ manga }: MangaCardProps) {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return "N/A"
+    try {
+      return new Date(dateString).toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    } catch {
+      return "N/A"
+    }
+  }
+
   return (
     <Link href={`/manga/${manga.mal_id}`}>
       <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
@@ -57,6 +70,7 @@ export function MangaCard({ manga }: MangaCardProps) {
             </div>
           )}
         </CardFooter>
+        <div className="text-lg font-semibold">{manga.published?.from ? formatDate(manga.published.from) : "N/A"}</div>
       </Card>
     </Link>
   )

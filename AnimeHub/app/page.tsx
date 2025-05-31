@@ -23,11 +23,17 @@ export default function HomePage() {
         const seasonResponse = await JikanAPI.getCurrentSeasonAnime()
         setCurrentSeasonAnime(seasonResponse.data.slice(0, 8))
 
+        // Pequeña pausa para respetar rate limiting
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+
         // Obtener top anime
         const topResponse = await JikanAPI.getTopAnime()
         setTopAnime(topResponse.data.slice(0, 4))
       } catch (error) {
         console.error("Error fetching data:", error)
+        // En caso de error, mostrar contenido por defecto
+        setCurrentSeasonAnime([])
+        setTopAnime([])
       } finally {
         setLoading(false)
       }

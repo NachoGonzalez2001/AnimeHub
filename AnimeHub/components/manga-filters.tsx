@@ -120,7 +120,6 @@ export function MangaFilters({ onFiltersChange, loading }: MangaFiltersProps) {
                 <SelectValue placeholder="Seleccionar tipo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos</SelectItem>
                 {MANGA_TYPES.map((type) => (
                   <SelectItem key={type.value} value={type.value}>
                     {type.label}
@@ -138,7 +137,6 @@ export function MangaFilters({ onFiltersChange, loading }: MangaFiltersProps) {
                 <SelectValue placeholder="Seleccionar estado" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos</SelectItem>
                 {MANGA_STATUS.map((status) => (
                   <SelectItem key={status.value} value={status.value}>
                     {status.label}

@@ -121,7 +121,6 @@ export function AnimeFilters({ onFiltersChange, loading }: AnimeFiltersProps) {
                 <SelectValue placeholder="Seleccionar tipo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos</SelectItem>
                 {ANIME_TYPES.map((type) => (
                   <SelectItem key={type.value} value={type.value}>
                     {type.label}
@@ -139,7 +138,6 @@ export function AnimeFilters({ onFiltersChange, loading }: AnimeFiltersProps) {
                 <SelectValue placeholder="Seleccionar estado" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos</SelectItem>
                 {ANIME_STATUS.map((status) => (
                   <SelectItem key={status.value} value={status.value}>
                     {status.label}
@@ -157,7 +155,6 @@ export function AnimeFilters({ onFiltersChange, loading }: AnimeFiltersProps) {
                 <SelectValue placeholder="Seleccionar clasificación" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todas</SelectItem>
                 {ANIME_RATINGS.map((rating) => (
                   <SelectItem key={rating.value} value={rating.value}>
                     {rating.label}

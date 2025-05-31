@@ -26,6 +26,7 @@ export interface AnimeData {
   studios?: Array<{ mal_id: number; name: string }>
   year?: number
   season?: string
+  type?: string
 }
 
 export interface MangaData {
@@ -56,6 +57,7 @@ export interface MangaData {
     from?: string
     to?: string
   }
+  type?: string
 }
 
 export interface JikanResponse<T> {
@@ -129,6 +131,29 @@ export interface Genre {
   count: number
 }
 
+export interface RecommendationEntry {
+  mal_id: number
+  title: string
+  images: {
+    jpg: {
+      image_url: string
+      small_image_url: string
+      large_image_url: string
+    }
+  }
+}
+
+export interface RecommendationData {
+  mal_id: string
+  entry: RecommendationEntry[]
+  content: string
+  date: string
+  user: {
+    username: string
+    url: string
+  }
+}
+
 const BASE_URL = "https://api.jikan.moe/v4"
 
 // Función para manejar delays entre requests (Jikan tiene rate limiting)
@@ -178,15 +203,21 @@ export class JikanAPI {
     return this.makeRequest<JikanSingleResponse<MangaData>>(url)
   }
 
-  // Top anime
-  static async getTopAnime(page = 1): Promise<JikanResponse<AnimeData>> {
-    const url = `${BASE_URL}/top/anime?page=${page}&limit=20`
+  // Top anime con filtro de tipo
+  static async getTopAnime(page = 1, type?: string): Promise<JikanResponse<AnimeData>> {
+    let url = `${BASE_URL}/top/anime?page=${page}&limit=25`
+    if (type && type !== "") {
+      url += `&type=${type}`
+    }
     return this.makeRequest<JikanResponse<AnimeData>>(url)
   }
 
-  // Top manga
-  static async getTopManga(page = 1): Promise<JikanResponse<MangaData>> {
-    const url = `${BASE_URL}/top/manga?page=${page}&limit=20`
+  // Top manga con filtro de tipo
+  static async getTopManga(page = 1, type?: string): Promise<JikanResponse<MangaData>> {
+    let url = `${BASE_URL}/top/manga?page=${page}&limit=25`
+    if (type && type !== "") {
+      url += `&type=${type}`
+    }
     return this.makeRequest<JikanResponse<MangaData>>(url)
   }
 
@@ -194,12 +225,6 @@ export class JikanAPI {
   static async getCurrentSeasonAnime(): Promise<JikanResponse<AnimeData>> {
     const url = `${BASE_URL}/seasons/now`
     return this.makeRequest<JikanResponse<AnimeData>>(url)
-  }
-
-  // Recomendaciones de anime
-  static async getAnimeRecommendations(): Promise<any> {
-    const url = `${BASE_URL}/recommendations/anime`
-    return this.makeRequest(url)
   }
 
   // Buscar anime con filtros avanzados
@@ -240,5 +265,40 @@ export class JikanAPI {
   static async getMangaGenres(): Promise<{ data: Genre[] }> {
     const url = `${BASE_URL}/genres/manga`
     return this.makeRequest<{ data: Genre[] }>(url)
+  }
+
+  // Obtener recomendaciones de anime
+  static async getAnimeRecommendations(page = 1): Promise<JikanResponse<RecommendationData>> {
+    const url = `${BASE_URL}/recommendations/anime?page=${page}`
+    return this.makeRequest<JikanResponse<RecommendationData>>(url)
+  }
+
+  // Obtener recomendaciones de manga
+  static async getMangaRecommendations(page = 1): Promise<JikanResponse<RecommendationData>> {
+    const url = `${BASE_URL}/recommendations/manga?page=${page}`
+    return this.makeRequest<JikanResponse<RecommendationData>>(url)
+  }
+
+  // Obtener recomendaciones específicas para un anime
+  static async getAnimeRecommendationsById(id: number): Promise<any> {
+    const url = `${BASE_URL}/anime/${id}/recommendations`
+    return this.makeRequest(url)
+  }
+
+  // Obtener recomendaciones específicas para un manga
+  static async getMangaRecommendationsById(id: number): Promise<any> {
+    const url = `${BASE_URL}/manga/${id}/recommendations`
+    return this.makeRequest(url)
+  }
+
+  // Obtener anime/manga aleatorio para recomendaciones
+  static async getRandomAnime(): Promise<JikanSingleResponse<AnimeData>> {
+    const url = `${BASE_URL}/random/anime`
+    return this.makeRequest<JikanSingleResponse<AnimeData>>(url)
+  }
+
+  static async getRandomManga(): Promise<JikanSingleResponse<MangaData>> {
+    const url = `${BASE_URL}/random/manga`
+    return this.makeRequest<JikanSingleResponse<MangaData>>(url)
   }
 }
