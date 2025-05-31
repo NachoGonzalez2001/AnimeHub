@@ -3,8 +3,19 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Home, Search, BookOpen, TrendingUp, Star, Menu, X, Lightbulb } from "lucide-react"
+import {
+  Home,
+  Search,
+  BookOpen,
+  TrendingUp,
+  Star,
+  Menu,
+  X,
+  Lightbulb,
+  CalendarDays
+} from "lucide-react"
 import { useState } from "react"
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 
 const navigationItems = [
   { href: "/", label: "Inicio", icon: Home },
@@ -13,8 +24,7 @@ const navigationItems = [
   { href: "/top-anime", label: "Top Anime", icon: TrendingUp },
   { href: "/top-manga", label: "Top Manga", icon: Star },
   { href: "/recommendations", label: "Recomendaciones", icon: Lightbulb },
-  // Temporalmente para pruebas - remover en producción
-  { href: "/test", label: "Test", icon: Search },
+  { href: "/test", label: "Test", icon: Search }, // para pruebas
 ]
 
 export function Navigation() {
@@ -48,6 +58,30 @@ export function Navigation() {
                 </Link>
               )
             })}
+
+            {/* Dropdown personalizado para "Temporada" */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={pathname.startsWith("/temporada") ? "default" : "ghost"}
+                  className="flex items-center space-x-2"
+                >
+                  <CalendarDays className="w-4 h-4" />
+                  <span>Temporada</span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-48 p-2">
+                <Link href="/temporada/anime" className="block px-2 py-1 hover:bg-muted rounded">
+                  Anime
+                </Link>
+                <Link href="/temporada/manga" className="block px-2 py-1 hover:bg-muted rounded">
+                  Manga
+                </Link>
+                <Link href="/temporada/proximos" className="block px-2 py-1 hover:bg-muted rounded">
+                  Próximos Estrenos
+                </Link>
+              </PopoverContent>
+            </Popover>
           </div>
 
           {/* Mobile menu button */}
@@ -77,6 +111,41 @@ export function Navigation() {
                 </Link>
               )
             })}
+
+            {/* Separador visual */}
+            <hr className="mx-4 my-2 border-muted" />
+
+            {/* Temporada en mobile */}
+            <div className="px-4 pt-2">
+              <p className="text-sm text-muted-foreground mb-1">Temporada</p>
+              <Link href="/temporada/anime">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Anime
+                </Button>
+              </Link>
+              <Link href="/temporada/manga">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Manga
+                </Button>
+              </Link>
+              <Link href="/temporada/proximos">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Próximos Estrenos
+                </Button>
+              </Link>
+            </div>
           </div>
         )}
       </div>
