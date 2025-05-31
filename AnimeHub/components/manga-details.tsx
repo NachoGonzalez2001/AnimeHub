@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { MediaStats } from "@/components/media-stats"
 import { GenreList } from "@/components/genre-list"
+import { CharacterList } from "@/components/character-list"
 import type { MangaData } from "@/lib/jikan-api"
 import { BookOpen, Calendar, FileText, User, ExternalLink, Book } from "lucide-react"
 
@@ -183,6 +184,9 @@ export function MangaDetails({ manga }: MangaDetailsProps) {
           type="manga"
         />
       </div>
+
+      {/* Personajes */}
+      <CharacterList mediaId={manga.mal_id} mediaType="manga" />
 
       {/* Géneros y Autores */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

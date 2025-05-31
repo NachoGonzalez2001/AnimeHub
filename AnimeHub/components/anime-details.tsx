@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { MediaStats } from "@/components/media-stats"
 import { GenreList } from "@/components/genre-list"
+import { CharacterList } from "@/components/character-list"
 import type { AnimeData } from "@/lib/jikan-api"
 import { Play, Calendar, Clock, Monitor, ExternalLink } from "lucide-react"
 
@@ -51,7 +52,7 @@ export function AnimeDetails({ anime }: AnimeDetailsProps) {
               alt={anime.title}
               className="w-full rounded-lg shadow-lg"
             />
-            <div className="mt-4 space-y-2">
+            {/* <div className="mt-4 space-y-2">
               <Button className="w-full" size="lg">
                 <Play className="w-5 h-5 mr-2" />
                 Ver Anime
@@ -60,7 +61,7 @@ export function AnimeDetails({ anime }: AnimeDetailsProps) {
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Ver en MyAnimeList
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -70,7 +71,7 @@ export function AnimeDetails({ anime }: AnimeDetailsProps) {
             <div className="flex items-center gap-3 mb-2">
               <Badge className={`${getStatusColor(anime.status)} text-white`}>{getStatusText(anime.status)}</Badge>
               {anime.rating && <Badge variant="outline">{anime.rating}</Badge>}
-              {anime.year && <Badge variant="secondary">{anime.year}</Badge>\
+              {anime.year && <Badge variant="secondary">{anime.year}</Badge>}
             </div>
 
             <h1 className="text-4xl font-bold mb-2">{anime.title}</h1>
@@ -79,9 +80,7 @@ export function AnimeDetails({ anime }: AnimeDetailsProps) {
               <p className="text-xl text-muted-foreground mb-2">{anime.title_english}</p>
             )}
 
-            {anime.title_japanese && (
-              <p className="text-lg text-muted-foreground mb-4">{anime.title_japanese}</p>
-            )}
+            {anime.title_japanese && <p className="text-lg text-muted-foreground mb-4">{anime.title_japanese}</p>}
           </div>
 
           {/* Información técnica */}
@@ -148,6 +147,9 @@ export function AnimeDetails({ anime }: AnimeDetailsProps) {
           type="anime"
         />
       </div>
+
+      {/* Personajes */}
+      <CharacterList mediaId={anime.mal_id} mediaType="anime" />
 
       {/* Géneros y Estudios */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -22,7 +22,7 @@ export default function RecommendationsPage() {
           </p>
 
           {/* Info cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <Card>
               <CardContent className="p-4 text-center">
                 <Users className="w-8 h-8 text-blue-500 mx-auto mb-2" />
@@ -39,13 +39,6 @@ export default function RecommendationsPage() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-4 text-center">
-                <Heart className="w-8 h-8 text-red-500 mx-auto mb-2" />
-                <h3 className="font-semibold mb-1">Personalizado</h3>
-                <p className="text-sm text-muted-foreground">Marca tus favoritos para mejores recomendaciones</p>
-              </CardContent>
-            </Card>
           </div>
         </div>
 

@@ -73,11 +73,7 @@ export default function HomePage() {
               </Button>
             </Link>
             <Link href="/manga">
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto text-white border-white hover:bg-white hover:text-blue-600"
-              >
+              <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                 <Search className="w-5 h-5 mr-2" />
                 Explorar Manga
               </Button>

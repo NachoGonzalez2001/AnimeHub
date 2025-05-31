@@ -67,7 +67,7 @@ export function RankingFilters({ type, currentType, onTypeChange, onClear }: Ran
           </Select>
         </div>
 
-        <div className="bg-muted/50 p-3 rounded-lg">
+        {/* <div className="bg-muted/50 p-3 rounded-lg">
           <h4 className="text-sm font-medium mb-2">Información del Ranking:</h4>
           <ul className="text-xs text-muted-foreground space-y-1">
             <li>• Rankings basados en puntuaciones de MyAnimeList</li>
@@ -75,7 +75,7 @@ export function RankingFilters({ type, currentType, onTypeChange, onClear }: Ran
             <li>• Filtros por tipo para rankings específicos</li>
             <li>• Top 1000 {type === "anime" ? "animes" : "mangas"} disponibles</li>
           </ul>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   )

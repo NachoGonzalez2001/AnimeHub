@@ -70,7 +70,7 @@ export function MangaCard({ manga }: MangaCardProps) {
             </div>
           )}
         </CardFooter>
-        <div className="text-lg font-semibold">{manga.published?.from ? formatDate(manga.published.from) : "N/A"}</div>
+        <div className="p-4 flex justify-between items-center text-lg font-semibold">{manga.published?.from ? formatDate(manga.published.from) : "N/A"}</div>
       </Card>
     </Link>
   )

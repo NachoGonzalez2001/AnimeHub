@@ -92,10 +92,10 @@ export function AnimeFilters({ onFiltersChange, loading }: AnimeFiltersProps) {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="space-y-3">
           <CardTitle className="flex items-center gap-2">
             <Filter className="w-5 h-5" />
-            Filtros
+            Filtros de Anime
           </CardTitle>
           <div className="flex gap-2">
             {hasActiveFilters && (
@@ -188,7 +188,6 @@ export function AnimeFilters({ onFiltersChange, loading }: AnimeFiltersProps) {
                   <SelectValue placeholder="Orden" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="default">Por defecto</SelectItem>
                   <SelectItem value="desc">Descendente</SelectItem>
                   <SelectItem value="asc">Ascendente</SelectItem>
                 </SelectContent>

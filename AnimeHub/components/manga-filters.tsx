@@ -91,7 +91,7 @@ export function MangaFilters({ onFiltersChange, loading }: MangaFiltersProps) {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="space-y-3">
           <CardTitle className="flex items-center gap-2">
             <Filter className="w-5 h-5" />
             Filtros de Manga
@@ -170,7 +170,6 @@ export function MangaFilters({ onFiltersChange, loading }: MangaFiltersProps) {
                   <SelectValue placeholder="Orden" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="default">Por defecto</SelectItem>
                   <SelectItem value="desc">Descendente</SelectItem>
                   <SelectItem value="asc">Ascendente</SelectItem>
                 </SelectContent>

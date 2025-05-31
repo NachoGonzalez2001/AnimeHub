@@ -60,6 +60,32 @@ export interface MangaData {
   type?: string
 }
 
+export interface CharacterData {
+  character: {
+    mal_id: number
+    name: string
+    images: {
+      jpg: {
+        image_url: string
+      }
+    }
+    url: string
+  }
+  role: string
+  voice_actors?: Array<{
+    person: {
+      mal_id: number
+      name: string
+      images: {
+        jpg: {
+          image_url: string
+        }
+      }
+    }
+    language: string
+  }>
+}
+
 export interface JikanResponse<T> {
   data: T[]
   pagination: {
@@ -201,6 +227,18 @@ export class JikanAPI {
   static async getMangaById(id: number): Promise<JikanSingleResponse<MangaData>> {
     const url = `${BASE_URL}/manga/${id}`
     return this.makeRequest<JikanSingleResponse<MangaData>>(url)
+  }
+
+  // Obtener personajes de anime
+  static async getAnimeCharacters(id: number): Promise<{ data: CharacterData[] }> {
+    const url = `${BASE_URL}/anime/${id}/characters`
+    return this.makeRequest<{ data: CharacterData[] }>(url)
+  }
+
+  // Obtener personajes de manga
+  static async getMangaCharacters(id: number): Promise<{ data: CharacterData[] }> {
+    const url = `${BASE_URL}/manga/${id}/characters`
+    return this.makeRequest<{ data: CharacterData[] }>(url)
   }
 
   // Top anime con filtro de tipo

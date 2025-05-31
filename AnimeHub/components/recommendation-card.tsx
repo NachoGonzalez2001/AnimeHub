@@ -29,10 +29,6 @@ export function RecommendationCard({ recommendation, type }: RecommendationCardP
     }
   }
 
-  const handleLike = () => {
-    setLiked(!liked)
-    // Aquí podrías guardar en localStorage o enviar a una API
-  }
 
   if (!recommendation.entry || recommendation.entry.length < 2) {
     return null
@@ -58,9 +54,6 @@ export function RecommendationCard({ recommendation, type }: RecommendationCardP
               </p>
             </div>
           </div>
-          <Button variant="ghost" size="sm" onClick={handleLike} className={liked ? "text-red-500" : ""}>
-            <Heart className={`w-4 h-4 ${liked ? "fill-current" : ""}`} />
-          </Button>
         </div>
       </CardHeader>
 
