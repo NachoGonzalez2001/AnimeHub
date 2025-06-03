@@ -79,7 +79,7 @@ export default function TopAnimePage() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <Card>
+            <Card className="flex justify-center flex-col">
               <CardContent className="p-4 text-center">
                 <Crown className="w-8 h-8 text-yellow-500 mx-auto mb-2" />
                 <div className="text-2xl font-bold">Top Ranking</div>
@@ -89,7 +89,7 @@ export default function TopAnimePage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="flex justify-center flex-col">
               <CardContent className="p-4 text-center">
                 <TrendingUp className="w-8 h-8 text-blue-500 mx-auto mb-2" />
                 <div className="text-2xl font-bold">Página {currentPage}</div>
@@ -99,8 +99,8 @@ export default function TopAnimePage() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-4 text-center">
+            <Card className="flex justify-center flex-col">
+              <CardContent className="p-4 text-center flex justify-center flex-col">
                 <div className="text-2xl font-bold">{animes.length}</div>
                 <div className="text-sm text-muted-foreground">Resultados en esta página</div>
                 {typeFilter && (

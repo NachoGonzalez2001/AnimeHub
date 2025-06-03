@@ -11,6 +11,7 @@ const testRoutes = [
   { path: "/", name: "Página Principal", description: "Landing page con anime de temporada" },
   { path: "/anime", name: "Búsqueda de Anime", description: "Página de búsqueda y filtros de anime" },
   { path: "/manga", name: "Búsqueda de Manga", description: "Página de búsqueda y filtros de manga" },
+  { path: "/personaje", name: "Búsqueda de Personajes", description: "Página de búsqueda de personajes y su respectivo Seiyu" },
   { path: "/top-anime", name: "Top Anime", description: "Rankings de los mejores anime" },
   { path: "/top-manga", name: "Top Manga", description: "Rankings de los mejores manga" },
   { path: "/recommendations", name: "Recomendaciones", description: "Recomendaciones de la comunidad" },

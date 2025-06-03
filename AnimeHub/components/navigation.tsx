@@ -12,8 +12,9 @@ import {
   Menu,
   X,
   Lightbulb,
-  CalendarDays
-} from "lucide-react"
+  CalendarDays,
+  User
+} from "lucide-react";
 import { useState } from "react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 
@@ -21,6 +22,7 @@ const navigationItems = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/anime", label: "Anime", icon: Search },
   { href: "/manga", label: "Manga", icon: BookOpen },
+  { href: "/personaje", label: "Personaje", icon: User},
   { href: "/top-anime", label: "Top Anime", icon: TrendingUp },
   { href: "/top-manga", label: "Top Manga", icon: Star },
   { href: "/recommendations", label: "Recomendaciones", icon: Lightbulb },
@@ -45,7 +47,7 @@ export function Navigation() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4 ml-[5%]">
             {navigationItems.map((item) => {
               const Icon = item.icon
               const isActive = pathname === item.href
