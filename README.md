@@ -50,7 +50,8 @@ AnimeHub/
 │   ├── manga/                    # Búsqueda de manga
 │   │   ├── [id]/                 # Detalles de manga dinámico
 │   │   └── page.tsx
-│   ├── top-anime/                # Rankings de anime
+│   ├── personaje/                # Información sobre personaje buscado
+|   ├── top-anime/ 
 │   ├── top-manga/                # Rankings de manga
 │   ├── recommendations/          # Sistema de recomendaciones
 │   ├── test/                     # Página de pruebas (desarrollo)
@@ -253,10 +254,11 @@ npm run lint         # Ejecutar linter
 │ • /             │    │ • AnimeCard     │    │ • useAnimeSearch│
 │ • /anime        │◄──►│ • MangaCard     │◄──►│ • useMangaSearch│
 │ • /manga        │    │ • CharacterList │    │ • useRecommend. │
-│ • /top-anime    │    │ • Navigation    │    │                 │
-│ • /top-manga    │    │ • SearchBar     │    │                 │
-│ • /recommend.   │    │ • Filters       │    │                 │
-│ • /test         │    │ • Pagination    │    │                 │
+| • /personaje    |    | • Navigation    |    |                 |
+│ • /top-anime    │    │ • SearchBar     │    │                 │
+│ • /top-manga    │    │ • Filters       │    │                 │
+│ • /recommend.   │    │ • Pagination    │    │                 │
+│ • /test         │    │                 │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
                                 │
                                 ▼
@@ -297,18 +299,18 @@ npm run lint         # Ejecutar linter
                     │     (/)     │
                     └──────┬──────┘
                            │
-        ┌──────────────────┼─────────────────┐
-        │                  │                 │
-   ┌────▼────┐       ┌─────▼─────┐      ┌────▼────┐
-   │  Anime  │       │   Manga   │      │Rankings │
-   │ Search  │       │  Search   │      │         │
-   └────┬────┘       └─────┬─────┘      └────┬────┘
-        │                  │                 │
-   ┌────▼────┐       ┌─────▼─────┐      ┌────▼────┐
-   │ Anime   │       │   Manga   │      │Top Anime│
-   │Details  │       │ Details   │      │Top Manga│
-   │+ Chars  │       │+ Chars    │      └─────────┘
-   └─────────┘       └───────────┘     
+        ┌──────────────────┼─────────────────┼───────────────────┐
+        │                  │                 │                   |
+   ┌────▼────┐       ┌─────▼─────┐      ┌────▼────┐         ┌────▼─────┐ 
+   │  Anime  │       │   Manga   │      │Rankings │         │Personajes│
+   │ Search  │       │  Search   │      │         │         │          │
+   └────┬────┘       └─────┬─────┘      └────┬────┘         └────┬─────┘
+        │                  │                 │                   |
+   ┌────▼────┐       ┌─────▼─────┐      ┌────▼────┐         ┌────▼────┐
+   │ Anime   │       │   Manga   │      │Top Anime│         │Personaje│
+   │Details  │       │ Details   │      │Top Manga│         │Details  │
+   │+ Chars  │       │+ Chars    │      └─────────┘         │Seiyu    │
+   └─────────┘       └───────────┘                          └─────────┘
                            │           
                      ┌─────▼─────┐    
                      │Recommend. │     
