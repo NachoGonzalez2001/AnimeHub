@@ -13,7 +13,8 @@ import {
   X,
   Lightbulb,
   CalendarDays,
-  User
+  User,
+  Music
 } from "lucide-react";
 import { useState } from "react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
@@ -22,6 +23,7 @@ const navigationItems = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/anime", label: "Anime", icon: Search },
   { href: "/manga", label: "Manga", icon: BookOpen },
+  { href: "/opyend", label: "Openings y Endings", icon: Music },
   { href: "/personaje", label: "Personaje", icon: User},
   { href: "/top-anime", label: "Top Anime", icon: TrendingUp },
   { href: "/top-manga", label: "Top Manga", icon: Star },
@@ -35,7 +37,7 @@ export function Navigation() {
 
   return (
     <nav className="bg-background border-b sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ml-[-10px]">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
